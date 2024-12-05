@@ -14,9 +14,16 @@ const Signup = () => {
             const response = await axios.post('http://localhost:3000/api/auth/signup', { nome, email, senha });
             setMessage(response.data.message);
         } catch (error) {
-            setMessage('Erro ao criar usuário.');
+            if (error.response) {
+                setMessage('Erro ao criar usuário: ' + error.response.data.message);
+            } else if (error.request) {
+                setMessage('Erro de comunicação com o servidor.');
+            } else {
+                setMessage('Erro desconhecido: ' + error.message);
+            }
         }
     };
+    
 
     return (
         <div>

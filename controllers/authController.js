@@ -12,9 +12,14 @@ const login = (req, res) => {
 const signup = (req, res) => {
     const { nome, email, senha } = req.body;
 
-    // Aqui você pode fazer a lógica para cadastrar no banco de dados
-    // Exemplo de resposta simples:
-    return res.status(201).json({ message: 'Usuário criado com sucesso!' });
+    // Verifica se todos os campos foram enviados
+    if (!nome || !email || !senha) {
+        return res.status(400).json({ message: "Todos os campos são obrigatórios." });
+    }
+
+    // Apenas simulando a criação de um usuário
+    // No futuro, você pode conectar a um banco de dados
+    return res.status(201).json({ message: "Usuário criado com sucesso!" });
 };
 
 module.exports = { login, signup };
